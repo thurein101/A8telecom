@@ -17,6 +17,5 @@ export const ourFileRouter = {
     }),
 } satisfies FileRouter;
 
-// 🌟 အဓိကအချက်: အရှေ့တွင် "export" ထည့်ပေးရန် မမေ့ပါနှင့်။
-// ၎င်းမှသာ route.ts နှင့် utils/uploadthing.ts တို့က Type ကို လှမ်းသိမှာဖြစ်ပါတယ်
+
 export type OurFileRouter = typeof ourFileRouter;
