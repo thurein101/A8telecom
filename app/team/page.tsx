@@ -4,6 +4,7 @@ import TeamCom from "@/components/Team/TeamCom";
 
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0; 
 
 async function TeamDataSection() {
   const teamMembers = await prisma.teamMember.findMany({

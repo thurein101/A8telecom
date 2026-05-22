@@ -59,7 +59,7 @@ export default function AdminMessageInbox({ messages }: MessageProps) {
           messages.map((msg) => (
             <div
               key={msg.id}
-              // မဖတ်ရသေးလျှင် ညှို့မှိုင်းပြီး လင်းသော Border ပုံစံ၊ ဖတ်ပြီးလျှင် မှိန်သွားသော ပုံစံဖြစ်အောင် ပုံဖော်ထားသည်
+             
               className={`border p-5 rounded-xl transition-all space-y-3 relative ${
                 !msg.isRead 
                   ? "bg-slate-950 border-cyan-500/40 shadow-md shadow-cyan-500/5" 
@@ -71,7 +71,7 @@ export default function AdminMessageInbox({ messages }: MessageProps) {
                   <User size={14} className="text-cyan-500" />
                   <span>{msg.name}</span>
 
-                  {/* NEW BADGE - မဖတ်ရသေးပါက ပြသရန် */}
+                 
                   {!msg.isRead && (
                     <span className="text-[10px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold animate-pulse">
                       NEW
@@ -85,9 +85,9 @@ export default function AdminMessageInbox({ messages }: MessageProps) {
                     <span>{new Date(msg.createdAt).toLocaleString()}</span>
                   </div>
                   
-                  {/* Action Buttons: စီမံခန့်ခွဲမည့် ခလုတ်များ */}
+                
                   <div className="flex items-center gap-1">
-                    {/* မဖတ်ရသေးရင် Mark as read Button ကို ပြမည် */}
+                  
                     {!msg.isRead && (
                       <button
                         onClick={() => handleMarkAsRead(msg.id)}
@@ -98,7 +98,7 @@ export default function AdminMessageInbox({ messages }: MessageProps) {
                         <Eye size={15} />
                       </button>
                     )}
-                    {/* ဖျက်ပစ်မည့် ခလုတ် */}
+                 
                     <button
                       onClick={() => handleDelete(msg.id)}
                       disabled={isPending}

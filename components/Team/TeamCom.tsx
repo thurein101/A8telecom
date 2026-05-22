@@ -19,8 +19,8 @@ interface TeamComProps {
 }
 
 export default function TeamCom({ members }: TeamComProps) {
-  const sortedMembers = [...members].sort((a, b) => a.order - b.order);
-
+  // 🛠️ Optimization: Server ဘက်က Prisma နဲ့ order အတိုင်း စီပေးလိုက်ပြီဖြစ်လို့ 
+  // Client ဘက်မှာ ထပ်မံ Sort လုပ်စရာမလိုတော့ဘဲ တိုက်ရိုက် သုံးစွဲလိုက်ပါတယ်ဗျာ။
   return (
     <main className="bg-[#030712] text-white font-sans antialiased overflow-hidden selection:bg-cyan-500/20 selection:text-cyan-300">
       {/* HERO SECTION */}
@@ -69,27 +69,28 @@ export default function TeamCom({ members }: TeamComProps) {
           </div>
         </div>
 
-        {/* EMPTY */}
-        {sortedMembers.length === 0 ? (
+        {/* EMPTY STATE */}
+        {members.length === 0 ? (
           <div className="rounded-3xl border border-white/[0.06] bg-slate-900/40 p-10 text-center text-slate-500 max-w-xl mx-auto">
             No team members available.
           </div>
         ) : (
-          /* TEAM GRID - Mobile မှာ ၂ ကွက်စီထွက်စေရန် grid-cols-2 သတ်မှတ်ထားသည် */
+          /* TEAM GRID */
           <div className="grid gap-3 sm:gap-5 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
-            {sortedMembers.map((member, index) => {
+            {members.map((member, index) => {
               const isTopLeader = index === 0 || member.order === 1;
 
               return (
                 <div
-                  key={member.id}
+                  // 🛠️ FIX: Cache ငြိပြီး UI မှားယွင်းမှု မရှိစေရန် unique key တစ်ခုအဖြစ် ပေါင်းစပ်သတ်မှတ်ခြင်း
+                  key={`team-member-${member.id}-${index}`}
                   className={`group relative rounded-2xl md:rounded-3xl overflow-hidden border bg-gradient-to-b from-slate-900/80 to-slate-950 shadow-xl hover:-translate-y-1 transition-all duration-300 ${
                     isTopLeader
                       ? "border-cyan-500/20 hover:border-cyan-400/40"
                       : "border-white/[0.05] hover:border-white/10"
                   }`}
                 >
-                  {/* IMAGE - ဓာတ်ပုံ Height များကို အချိုးကျလျှော့ချထားသည် */}
+                  {/* IMAGE */}
                   <div className="relative h-[190px] sm:h-[260px] md:h-[280px] overflow-hidden bg-slate-950">
                     <Image
                       src={member.imageUrl}

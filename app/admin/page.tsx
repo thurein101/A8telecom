@@ -3,6 +3,10 @@ import { getActivities } from '@/app/actions/activities';
 import { getTeamMembers } from '@/app/actions/team';
 import { prisma } from '@/lib/prisma';
 
+// 🛠️ FIX: Admin Dashboard တစ်ခုလုံးကို Cloud Cache လုံးဝမလုပ်ဘဲ Real-time ဖြစ်အောင် ပိတ်ပစ်လိုက်ခြင်း
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function page() {
   const incomingMessages = (await prisma.contactMessage.findMany({
     orderBy: { createdAt: 'desc' },

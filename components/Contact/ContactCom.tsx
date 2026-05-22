@@ -22,37 +22,35 @@ export default function ContactCom() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const res = await createContactMessage({
-    name: formState.name,
-    email: formState.email,
-    phone: formState.phone,
-    subject: formState.subject,
-    message: formState.message,
-  });
-
-  if (res.success) {
-    setIsSubmitted(true);
-
-    setTimeout(() => setIsSubmitted(false), 5000);
-
-    setFormState({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "Business Inquiry",
-      message: "",
+    const res = await createContactMessage({
+      name: formState.name,
+      email: formState.email,
+      phone: formState.phone,
+      subject: formState.subject,
+      message: formState.message,
     });
-  } else {
-    alert("Failed to send message.");
-  }
-};
+
+    if (res.success) {
+      setIsSubmitted(true);
+      setTimeout(() => setIsSubmitted(false), 5000);
+      setFormState({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "Business Inquiry",
+        message: "",
+      });
+    } else {
+      alert("Failed to send message.");
+    }
+  };
+
   return (
     <main className="bg-slate-950 text-white font-sans antialiased">
-      
-      {/* 1. HEADER SECTION (TEXT CENTER) */}
+      {/* 1. HEADER SECTION */}
       <section className="relative pt-40 pb-16 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-white/5 flex flex-col items-center justify-center text-center">
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center">
           <div className="flex items-center gap-2 text-cyan-400 font-bold uppercase tracking-widest text-xs justify-center">
@@ -72,7 +70,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* LEFT: CORPORATE INFORMATION (5 Columns) */}
+          {/* LEFT: INFORMATION */}
           <div className="lg:col-span-5 space-y-6">
             <div>
               <span className="text-xs text-cyan-400 font-bold uppercase tracking-wider block">Corporate HQ</span>
@@ -81,8 +79,6 @@ const handleSubmit = async (e: React.FormEvent) => {
             </div>
 
             <div className="space-y-4 pt-4">
-              
-              {/* Address Card */}
               <div className="bg-slate-900/50 border border-white/10 rounded-xl p-5 flex items-start gap-4">
                 <MapPin className="text-cyan-400 mt-1 shrink-0" size={20} />
                 <div className="text-left">
@@ -94,7 +90,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              {/* Email Card */}
               <div className="bg-slate-900/50 border border-white/10 rounded-xl p-5 flex items-start gap-4">
                 <Mail className="text-cyan-400 mt-1 shrink-0" size={20} />
                 <div className="text-left">
@@ -106,7 +101,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              {/* Phone Card */}
               <div className="bg-slate-900/50 border border-white/10 rounded-xl p-5 flex items-start gap-4">
                 <Phone className="text-cyan-400 mt-1 shrink-0" size={20} />
                 <div className="text-left">
@@ -118,7 +112,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              {/* Working Hours Card */}
               <div className="bg-slate-900/50 border border-white/10 rounded-xl p-5 flex items-start gap-4">
                 <Clock className="text-cyan-400 mt-1 shrink-0" size={20} />
                 <div className="text-left">
@@ -129,11 +122,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                   <p className="text-xs text-slate-400 mt-0.5">ရုံးဖွင့်ချိန် (တနင်္ဂနွေနှင့် အစိုးရရုံးပိတ်ရက်များ ပိတ်ပါသည်)</p>
                 </div>
               </div>
-
             </div>
           </div>
 
-          {/* RIGHT: INTERACTIVE CONTACT FORM (7 Columns) */}
+          {/* RIGHT: FORM */}
           <div className="lg:col-span-7 bg-slate-900/40 border border-white/10 rounded-2xl p-8 relative">
             <div>
               <span className="text-xs text-cyan-400 font-bold uppercase tracking-wider block">Direct Mail</span>
@@ -142,16 +134,16 @@ const handleSubmit = async (e: React.FormEvent) => {
             </div>
 
             {isSubmitted ? (
+              // 🛠️ FIXED: ပြင်ဆင်ပြီးသား မြန်မာ/အင်္ဂလိပ် စာသား
               <div className="mt-8 bg-emerald-950/40 border border-emerald-500/30 rounded-xl p-6 flex flex-col items-center text-center justify-center min-h-[350px]">
                 <CheckCircle2 size={44} className="text-emerald-400 mb-4" />
                 <h3 className="text-lg font-bold text-white">Message Sent Successfully!</h3>
                 <p className="text-xs text-slate-400 mt-2 max-w-sm leading-relaxed">
-                  თქვენი შეტყობინება წარმატებით გაიგზავნა။ လူကြီးမင်းထံသို့ တာဝန်ရှိသူတစ်ဦးမှ အီးမေးလ် သို့မဟုတ် ဖုန်းဖြင့် အမြန်ဆုံး ပြန်လည်ဆက်သွယ်ပေးပါမည်။
+                  လူကြီးမင်းပေးပို့သော မက်ဆေ့ခ်ျအား အောင်မြင်စွာ လက်ခံရရှိပါပြီ။ တာဝန်ရှိသူတစ်ဦးမှ အီးမေးလ် (သို့မဟုတ်) ဖုန်းနံပါတ်သို့ အမြန်ဆုံး ပြန်လည်ဆက်သွယ်ပေးပါမည်။
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-8 space-y-5 font-sans">
-                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Your Name *</label>
@@ -167,7 +159,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Phone Number *</label>
                     <input 
-                      type="tel" 
+                      type="text" 
                       required
                       placeholder="0912345678" 
                       value={formState.phone}
@@ -221,17 +213,14 @@ const handleSubmit = async (e: React.FormEvent) => {
                   <Send size={14} />
                   Submit Inquiry Log • ကုမ္ပဏီသို့ပေးပို့ရန်
                 </button>
-
               </form>
             )}
           </div>
-
         </div>
       </section>
 
-      {/* 3. LOCATION MAP AREA */}
+      {/* 3. MAP AREA */}
       <section className="w-full h-[400px] bg-slate-900 border-t border-white/10 relative overflow-hidden">
-        {/* တကယ့် Map ချိတ်လိုပါက iframe link ကို src တွင် အစားထိုးနိုင်ပါသည် */}
         <iframe 
           title="Amara8 HQ Location Map in Pyay"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15024.316886862598!2d95.215!3d18.815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c7e21a22222221%3A0x2222222222222222!2sPyay%2C%20Myanmar!5e0!3m2!1sen!2smm!4v1700000000000" 
@@ -247,7 +236,6 @@ const handleSubmit = async (e: React.FormEvent) => {
           </p>
         </div>
       </section>
-
     </main>
   );
 }

@@ -162,11 +162,7 @@ export default function AdminDashboard({
           <AdminTeam initialMembers={teamMembers} />
         </section>
 
-        {/* 3. Customer Relations Communication */}
-        <section className="space-y-4">
-          <h3 className="text-sm font-mono uppercase tracking-wider text-slate-500 font-bold">3. Customer Relations Communication</h3>
-          <AdminMessageInbox messages={incomingMessages} />
-        </section>
+        
 
       </div>
     </div>

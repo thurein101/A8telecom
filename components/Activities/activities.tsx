@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Calendar, MapPin, HardHat, Eye } from "lucide-react";
 import Image from "next/image";
 import ActivityDetailUI from "../ActivitiesDetail";
@@ -14,7 +13,7 @@ interface ActivityData {
   subTitle: string;
   description: string;
   descriptionMm?: string;
-  images: { url: string }[];
+  images: { url: string; key?: string }[];
   createdAt: string | Date;
 }
 
@@ -29,9 +28,7 @@ export default function ActivitiesCom({
   currentPage,
   totalPages,
 }: ActivitiesComProps) {
-  const [selectedActivity, setSelectedActivity] = useState<ActivityData | null>(
-    null,
-  );
+  const [selectedActivity, setSelectedActivity] = useState<ActivityData | null>(null);
 
   if (selectedActivity) {
     return (
@@ -79,24 +76,18 @@ export default function ActivitiesCom({
         ) : (
           initialActivities.map((activity, index) => {
             const isEven = index % 2 === 0;
-
-            const firstImageUrl =
-              activity.images && activity.images.length > 0
-                ? activity.images[0].url
-                : "/placeholder-telecom.jpg";
+            const firstImageUrl = activity.images && activity.images.length > 0
+              ? activity.images[0].url
+              : "/placeholder-telecom.jpg";
 
             return (
+              // 🛠️ FIX: unique id သေချာစေရန် index ကိုပါ တွဲပေးပြီး key ငြိမှုကို ရှင်းထုတ်လိုက်ခြင်း
               <div
-                key={activity.id}
-                // 🛠️ Fix: bg-white/[0.06] နှင့် border-white/15 ကိုသုံးပြီး ကတ်များကို အလင်းပွင့် ပရီမီယံဒီဇိုင်း ပြောင်းထားပါသည်။
+                key={`activity-card-${activity.id}-${index}`}
                 className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-5 md:p-6 border border-white/15 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:bg-white/[0.09] hover:border-cyan-500/40 hover:shadow-cyan-500/[0.04] transition-all duration-300 group"
               >
-                {/* Individual Post Layout */}
-                <div
-                  className={`flex flex-col lg:flex-row gap-6 lg:gap-10 items-stretch ${
-                    isEven ? "" : "lg:flex-row-reverse"
-                  }`}
-                >
+                <div className={`flex flex-col lg:flex-row gap-6 lg:gap-10 items-stretch ${isEven ? "" : "lg:flex-row-reverse"}`}>
+                  
                   {/* 1. Image Block */}
                   <div className="w-full lg:w-[42%] flex">
                     <div className="relative overflow-hidden rounded-xl border border-white/10 aspect-[16/10] lg:aspect-auto w-full min-h-[220px] md:min-h-[250px] bg-slate-950 shadow-inner">
@@ -106,7 +97,7 @@ export default function ActivitiesCom({
                         fill
                         sizes="(max-w-1024px) 100vw, 40vw"
                         priority={index < 2}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102 opacity-100"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-100"
                       />
                       <div className="absolute top-3 left-3 bg-slate-950/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 text-[10px] text-cyan-400 font-semibold">
                         <MapPin size={11} className="text-cyan-500" />
@@ -115,16 +106,17 @@ export default function ActivitiesCom({
                     </div>
                   </div>
 
-                  {/* 2. Professional Content Block */}
+                  {/* 2. Content Block */}
                   <div className="w-full lg:w-[58%] flex flex-col justify-between py-1 text-left">
                     <div>
                       <div className="flex items-center gap-3 text-xs text-slate-400 font-mono mb-2">
                         <span className="flex items-center gap-1">
                           <Calendar size={12} />
-                          {new Date(activity.createdAt).toLocaleDateString(
-                            "en-US",
-                            { year: "numeric", month: "long", day: "numeric" },
-                          )}
+                          {new Date(activity.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
                         </span>
                         <span>•</span>
                         <span className="text-cyan-400 tracking-wider font-bold">
@@ -140,12 +132,10 @@ export default function ActivitiesCom({
                         {activity.titleMm}
                       </p>
 
-                      {/* Description Wrapper */}
                       <div className="space-y-2 border-l border-white/10 pl-4 my-3">
                         <p className="text-slate-200 text-xs md:text-sm leading-relaxed font-normal line-clamp-2">
                           {activity.description}
                         </p>
-                        
                         {activity.descriptionMm && (
                           <p className="text-slate-300 text-xs md:text-sm leading-relaxed font-normal line-clamp-2">
                             {activity.descriptionMm}
@@ -154,17 +144,19 @@ export default function ActivitiesCom({
                       </div>
                     </div>
 
-                    {/* Read Actions */}
+                    {/* Actions Button */}
                     <div className="pt-3 border-t border-white/10 mt-auto">
-                      <Link
-                        href={`/activities/${activity.id}`}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedActivity(activity)}
                         className="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider hover:text-cyan-300 transition-colors group/link"
                       >
                         <Eye size={13} />
                         <span>View Operational Gallery Logs</span>
                         <span className="transform translate-x-0 group-hover/link:translate-x-1 transition-transform">→</span>
-                      </Link>
+                      </button>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -172,7 +164,7 @@ export default function ActivitiesCom({
           })
         )}
 
-        {/* PAGINATION */}
+         {/* PAGINATION */}
         <div className="flex items-center justify-center gap-3 pt-12">
           {/* Previous */}
           {currentPage > 1 && (
