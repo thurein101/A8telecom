@@ -14,7 +14,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/service" }, // Note: /services ဖြစ်ရမလား ပြန်စစ်နိုင်ပါသည်
-  { name: "Activities", href: "/activities" },
+  { name: "Activities", href: "/activities?page=1" },
   { name: "Team", href: "/team" },
   { name: "Contact", href: "/contact" },
 ];

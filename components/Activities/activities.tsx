@@ -1,18 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import { Calendar, MapPin, HardHat, Eye } from "lucide-react";
 import Image from "next/image";
-import ActivityDetailUI from "../ActivitiesDetail";
 import Link from "next/link";
 
 interface ActivityData {
   id: string | number;
   title: string;
-  titleMm: string;
-  subTitle: string;
+  titleMm: string | null;
+  subTitle: string | null;
   description: string;
-  descriptionMm?: string;
+  descriptionMm?: string | null;
   images: { url: string; key?: string }[];
   createdAt: string | Date;
 }
@@ -28,24 +26,9 @@ export default function ActivitiesCom({
   currentPage,
   totalPages,
 }: ActivitiesComProps) {
-  const [selectedActivity, setSelectedActivity] = useState<ActivityData | null>(null);
-
-  if (selectedActivity) {
-    return (
-      <ActivityDetailUI
-        activity={{
-          title: selectedActivity.title,
-          titleMm: selectedActivity.titleMm,
-          subTitle: selectedActivity.subTitle || "Field Operations",
-          description: selectedActivity.descriptionMm
-            ? `${selectedActivity.description}\n\n${selectedActivity.descriptionMm}`
-            : selectedActivity.description,
-          images: selectedActivity.images,
-          createdAt: new Date(selectedActivity.createdAt),
-        }}
-      />
-    );
-  }
+  
+  // 💡 State စနစ်ဖြင့် Detail ပြသခြင်းကို လုံးဝ (လုံးဝ) ဖြုတ်ပစ်လိုက်ပါပြီ။
+  // ထိုသို့လုပ်ခြင်းဖြင့် Back Button နှိပ်လျှင် လမ်းကြောင်းလွဲစရာ အကြောင်းမရှိတော့ပါ။
 
   return (
     <main className="bg-slate-950 text-white font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-400">
@@ -81,7 +64,6 @@ export default function ActivitiesCom({
               : "/placeholder-telecom.jpg";
 
             return (
-              // 🛠️ FIX: unique id သေချာစေရန် index ကိုပါ တွဲပေးပြီး key ငြိမှုကို ရှင်းထုတ်လိုက်ခြင်း
               <div
                 key={`activity-card-${activity.id}-${index}`}
                 className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-5 md:p-6 border border-white/15 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:bg-white/[0.09] hover:border-cyan-500/40 hover:shadow-cyan-500/[0.04] transition-all duration-300 group"
@@ -118,19 +100,19 @@ export default function ActivitiesCom({
                             day: "numeric",
                           })}
                         </span>
-                        <span>•</span>
-                        <span className="text-cyan-400 tracking-wider font-bold">
-                          Deploy #{index + 1}
-                        </span>
+                       
+                      
                       </div>
 
                       <h2 className="text-lg md:text-xl font-extrabold tracking-tight text-white leading-snug group-hover:text-cyan-400 transition-colors duration-300">
                         {activity.title}
                       </h2>
 
-                      <p className="text-xs font-semibold text-cyan-400 mt-1 mb-3">
-                        {activity.titleMm}
-                      </p>
+                      {activity.titleMm && (
+                        <p className="text-xs font-semibold text-cyan-400 mt-1 mb-3">
+                          {activity.titleMm}
+                        </p>
+                      )}
 
                       <div className="space-y-2 border-l border-white/10 pl-4 my-3">
                         <p className="text-slate-200 text-xs md:text-sm leading-relaxed font-normal line-clamp-2">
@@ -146,15 +128,15 @@ export default function ActivitiesCom({
 
                     {/* Actions Button */}
                     <div className="pt-3 border-t border-white/10 mt-auto">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedActivity(activity)}
+                  
+                      <Link
+                        href={`/activities/${activity.id}`}
                         className="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider hover:text-cyan-300 transition-colors group/link"
                       >
                         <Eye size={13} />
                         <span>View Operational Gallery Logs</span>
                         <span className="transform translate-x-0 group-hover/link:translate-x-1 transition-transform">→</span>
-                      </button>
+                      </Link>
                     </div>
 
                   </div>
@@ -164,9 +146,8 @@ export default function ActivitiesCom({
           })
         )}
 
-         {/* PAGINATION */}
+        {/* PAGINATION */}
         <div className="flex items-center justify-center gap-3 pt-12">
-          {/* Previous */}
           {currentPage > 1 && (
             <Link
               href={`/activities?page=${currentPage - 1}`}
@@ -176,7 +157,6 @@ export default function ActivitiesCom({
             </Link>
           )}
 
-          {/* Page Numbers */}
           {Array.from({ length: totalPages }).map((_, i) => {
             const page = i + 1;
 
@@ -195,7 +175,6 @@ export default function ActivitiesCom({
             );
           })}
 
-          {/* Next */}
           {currentPage < totalPages && (
             <Link
               href={`/activities?page=${currentPage + 1}`}

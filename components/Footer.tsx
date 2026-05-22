@@ -66,7 +66,7 @@ export default function FooterCom() {
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="text-cyan-400 shrink-0" />
                   <p className="font-medium tracking-wide hover:text-cyan-400 transition-colors cursor-pointer">
-                    +95 9 987 654 321
+                   095149718 
                   </p>
                 </div>
                 <div className="flex items-center gap-2">

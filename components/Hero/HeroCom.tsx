@@ -40,7 +40,7 @@ const slides = [
     id: 3,
     subTitle: "Engineering Excellence Since 2020",
     title: "Trusted Telecom Engineering Partner",
-    titleMm: "ယုံကြည်စိတ်ချရသော ဆက်သွယ်ရေးအင်ဂျင်နီယာလုပ်ငန်း အဖော်အဖက်",
+    titleMm: "ယုံကြည်စိတ်ချရသော ဆက်သွယ်ရေးအင်ဂျင်နီယာလုပ်ငန်းများအတွက် ယုံကြည်စိတ်ချရသော မိတ်ဖက်",
     description:
       "Bringing urban-grade communication network quality directly to regional communities and rural areas to support economic development.",
     image:

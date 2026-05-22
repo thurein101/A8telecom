@@ -106,7 +106,7 @@ export default function ContactCom() {
                 <div className="text-left">
                   <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block font-bold">Hotline & Operations</span>
                   <p className="text-sm font-semibold text-white mt-1 tracking-wider">
-                    +95 9 987 654 321
+                    095149718 
                   </p>
                   <p className="text-xs text-slate-400 mt-0.5">ဆက်သွယ်ရန် ဖုန်းနံပါတ်များ</p>
                 </div>
