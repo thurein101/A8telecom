@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 
 
 export const metadata = {
-  title: "A8 Telecom | Professional Telecom & Engineering Services",
+  title: "Amara8 Telecom | Professional Telecom & Engineering Services",
   description: "မြေပြင်လုပ်ငန်းခွင်မှတ်တမ်းများနှင့် အဆင့်မြင့် တယ်လီကွန်း အင်ဂျင်နီယာ ဝန်ဆောင်မှုများ",
-  keywords: ["A8 Telecom", "Telecom Myanmar", "Engineering Services", "Field Operations"],
+  keywords: ["Amara8", "A8", "A8 Telecom", "Telecom Myanmar", "Engineering Services", "Field Operations"],
   robots: {
     index: true, 
     follow: true, 

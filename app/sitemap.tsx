@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://www.a8telecom.com"; // 🌟 မိမိဝဘ်ဆိုက် Domain ချိတ်လျှင် ဤနေရာတွင် အမှန်ပြင်ပေးပါ
+  const baseUrl = "https://www.a8telecom.com"; 
 
  
   const staticRoutes = [
