@@ -17,9 +17,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Amara8 Telecom | Engineering Solutions",
-  description: "Professional Metro, ODN, FTTH & Power Solutions across Myanmar.",
+
+export const metadata = {
+  title: "A8 Telecom | Professional Telecom & Engineering Services",
+  description: "မြေပြင်လုပ်ငန်းခွင်မှတ်တမ်းများနှင့် အဆင့်မြင့် တယ်လီကွန်း အင်ဂျင်နီယာ ဝန်ဆောင်မှုများ",
+  keywords: ["A8 Telecom", "Telecom Myanmar", "Engineering Services", "Field Operations"],
+  robots: {
+    index: true, 
+    follow: true, 
+  },
+  verification: {
+    google: "FKJKU6a0V2dBhOy4U9nu1BBNo1VT7BN6p_EJrf90o8k",
+  },
 };
 
 export default function RootLayout({
