@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/admin/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "a8telecom.vercel.app" 
+        }
+      ],
+      "destination": "/404", 
+      "permanent": false
+    }
+  ]
+}

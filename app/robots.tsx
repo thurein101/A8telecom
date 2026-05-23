@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/api/"], 
     },
-    sitemap: "https://a8telecom.vercel.app/", 
+    sitemap: "https://amara8.com/sitemap.xml", 
   };
 }
