@@ -22,10 +22,26 @@ export const metadata = {
   title: "Amara8 Telecom | Professional Telecom & Engineering Services",
   description: "မြေပြင်လုပ်ငန်းခွင်မှတ်တမ်းများနှင့် အဆင့်မြင့် တယ်လီကွန်း အင်ဂျင်နီယာ ဝန်ဆောင်မှုများ",
   keywords: ["Amara8", "A8", "A8 Telecom", "Telecom Myanmar", "Engineering Services", "Field Operations"],
-  robots: {
-    index: true, 
-    follow: true, 
+  
+  
+  openGraph: {
+    siteName: "Amara8 Telecom", 
+    title: "Amara8 Telecom | Professional Telecom & Engineering Services",
+    description: "မြေပြင်လုပ်ငန်းခွင်မှတ်တမ်းများနှင့် အဆင့်မြင့် တယ်လီကွန်း အင်ဂျင်နီယာ ဝန်ဆောင်မှုများ",
+    type: "website",
   },
+
+  
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true, 
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
   verification: {
     google: "FKJKU6a0V2dBhOy4U9nu1BBNo1VT7BN6p_EJrf90o8k",
   },
